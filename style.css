@@ -32,11 +32,14 @@ div {
  
  .contents{
    margin: 0px 5vw;
+   margin-bottom: 10px;
  }
  
  h3 {
    height: 3rem;
    color: #5B5B5B;
+   line-height: 3rem;
+   padding-left: 10px;
    background: #EEF9FF;
    border-left:10px solid #AAD6EC;
  }

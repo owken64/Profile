@@ -23,11 +23,13 @@ div {
 @media screen and (min-width: 768px) { 
   .title { height: 350px; }
   h1 { font-size: 120px;}
+  h3 { font-size: 30px; }
 }
 
 @media screen and (max-width: 768px) { 
   .title{height: 200px;}
   h1 { font-size: 70px;}
+  h3 { font-size: 20px; }
 }
  
  .contents{

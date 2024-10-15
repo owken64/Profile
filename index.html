@@ -30,19 +30,31 @@
   <div class="contents">
     <h3> 自己紹介 </h3>
     <img class="introduction" src="introduction.png"><br>
-    希望する渾名は、幸福な王子。
   
     <h3> ワークス </h3>
-    <ul>
-      <li>(仮称)Metropolis - 開発中(2052年完成予定) </li>
-      <li>無名のアプリケーション<a href="https://github.com/owken64/kokoro/">(GitHub)</a></li>
-    </ul>
+    まだ成果はないです。
+    
+    <h3> 依頼について </h3>
+    まだ正式に募集しておりませんが、<br>
+    楽曲のマスタリングを無料で引き受けたいと思います。<br>
+    商用の方はお引き取りください。<br>
+    成果物に不満があってもノークレームでお願いいたします。<br>
+    依頼先は下記まで<br>
+    otnkkw@gmail.com<br>
   
     <h3>呟き (X 旧Twitter)</h3>
     <a class="twitter-timeline" data-lang="ja" data-width="300" data-height="400" href="https://twitter.com/OtonakiKewa?ref_src=twsrc%5Etfw">Tweets by OtonakiKewa</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     
     <h3>読んだ本のリスト</h3>
-    csvは<a href="/ReadBooks/books_I_read.csv">こちら</a>
+    <textarea id="csvContent" rows="10" cols="50" readonly></textarea>
+    <script>
+        fetch('http://owken64.github.io/ReadBooks/books_I_read.csv')
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById('csvContent').value = text;
+        });
+    </script>
+
   </div>
   
   <footer>

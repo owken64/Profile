@@ -48,7 +48,7 @@
     <h3>読んだ本のリスト</h3>
     <textarea id="csvContent" rows="10" cols="50" readonly></textarea>
     <script>
-        fetch('http://owken64.github.io/ReadBooks/books_I_read.csv')
+        fetch('/ReadBooks/books_I_read.csv')
         .then(response => response.text())
         .then(text => {
             document.getElementById('csvContent').value = text;

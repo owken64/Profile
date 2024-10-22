@@ -1,7 +1,51 @@
 <HTML>
 <HEAD>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize-css@2.3.1/normalize.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.css">
+<link rel="stylesheet" href="./assets/common.css">
 <link rel="stylesheet" href="style.css">
+
+<style>
+    .dots {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      padding: 10px 0;
+      justify-content: center;
+    }
+    .dot {
+      border: none;
+      width: 10px;
+      height: 10px;
+      background: #c5c5c5;
+      border-radius: 50%;
+      margin: 0 5px;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .dot--active {
+      background: #000;
+    }
+    .arrow {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    .arrow--left {
+      left: 5px;
+    }
+    .arrow--right {
+      left: auto;
+      right: 5px;
+    }
+  </style>
+
 <title>Studio Silence</title>
 </HEAD>
 <BODY>
@@ -55,6 +99,100 @@
         });
     </script>
 
+  <h3>ギャラリー</h3>
+  <div class="wrapper" style="margin-top:30px;">
+    <div class="carousel-wrapper">
+      <div class="keen-slider carousel">
+        <div class="keen-slider__slide">
+          <div class="item item__blue">
+            <img src="https://www.amazon.co.jp/photos/share/U1UKNdLAr53Pgm1BUStYglczIUGacizowFg8WHp54tE">
+          </div>
+        </div>
+        <div class="keen-slider__slide">
+          <div class="item item__yellow">
+            <img src="https://www.amazon.co.jp/photos/share/M6ChRrnOG8eAq26z45FBKST3t5Go2pmuifyfkWEmZAC">
+          </div>
+        </div>
+        <div class="keen-slider__slide">
+          <div class="item item__red">
+            <img src="https://www.amazon.co.jp/photos/share/BmZOCtfqFkrVtDh9LS5Jz16EhlxC29Xrlnbnajw1beG">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" id="arrow-left" class="arrow arrow--left">
+        <img src="./assets/arrow-left.svg" alt="">
+      </button>
+      <button type="button" id="arrow-right" class="arrow arrow--right">
+        <img src="./assets/arrow-right.svg" alt="">
+      </button>
+
+      <div id="dots" class="dots"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/keen-slider@5.5.1/keen-slider.min.js"></script>
+  <script type="text/javascript">
+    const keenSlider = new KeenSlider(".keen-slider", {
+      loop: true,
+      created: (instance) => { // 初めて初期化された後に実行
+        // 左の矢印ボタンをクリックしたら1つ前のスライドに移動
+        document
+          .getElementById("arrow-left")
+          .addEventListener("click", () => {
+            instance.prev();
+          });
+
+        // 右の矢印ボタンをクリックしたら1つ先のスライドに移動
+        document
+          .getElementById("arrow-right")
+          .addEventListener("click", () => {
+            instance.next();
+          });
+
+        // ドットインジケーターを生成する親要素を取得
+        const dots_wrapper = document.getElementById("dots");
+
+        // スライドと同じ数のドットインジケーターを生成
+        const slides = document.querySelectorAll(".keen-slider__slide");
+        slides.forEach((t, idx) => {
+          const dot = document.createElement("button");
+          dot.classList.add("dot");
+          dots_wrapper.appendChild(dot);
+
+          // ドットインジケーターをクリックしたら同じインデックスのスライドへ移動
+          dot.addEventListener("click", () => {
+            instance.moveToSlide(idx);
+          });
+        });
+
+        // CSSクラスの更新
+        updateClasses(instance);
+      },
+      slideChanged: (instance) => { // 現在表示されているスライドが変更された時に実行
+        // CSSクラスの更新
+        updateClasses(instance);
+      },
+    })
+
+    /**
+     * 各要素のCSSクラスを更新
+     * @param instance
+     */
+    function updateClasses(instance) {
+      // 現在表示しているスライドの列番号を取得
+      const slide = instance.details().relativeSlide;
+
+      // 生成されたドットインジケーターの要素を取得し状態を更新
+      const dots = document.querySelectorAll(".dot");
+      dots.forEach((dot, idx) => {
+        idx === slide
+          ? dot.classList.add("dot--active")
+          : dot.classList.remove("dot--active");
+      })
+    }
+  </script>
   </div>
   
   <footer>
